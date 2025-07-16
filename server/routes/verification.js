@@ -3,8 +3,8 @@ const router = express.Router();
 const multer = require('multer');
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const cloudinary = require('cloudinary').v2;
-const Verification = require('../models/Verification'); // Make sure this model exists
-
+// const Verification = require('../models/Verification'); // Make sure this model exists
+const Verification = require('../models/verification')
 // Cloudinary config
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
