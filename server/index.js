@@ -10,7 +10,11 @@ const adminRoutes = require('./routes/admin');
 const app = express(); // ✅ Must come BEFORE app.use()
 
 // Middlewares
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:5173', 'https://gcasl-philippines.vercel.app'],
+  credentials: true,
+}));
+
 app.use(express.json());
 
 // Routes
