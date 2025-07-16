@@ -45,7 +45,7 @@ const SignupForm = () => {
       }
 
       login(data.token); // AuthContext handles storing token and fetching user
-      navigate('/dashboard');
+      navigate('/redirect'); // Redirect to verify page
     } catch (err) {
       setError('Something went wrong. Please try again.');
       console.error(err);

@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const Verification = require('../models/verification');
-const User = require('../models/User'); // ✅ Make sure this is included
+const User = require('../models/User');
 const Withdrawal = require('../models/withdrawal');
 const { verifyUser } = require('../controllers/adminController');
-
 
 // GET all verifications
 router.get('/verifications', async (req, res) => {
@@ -16,22 +15,10 @@ router.get('/verifications', async (req, res) => {
   }
 });
 
-// POST approve or reject
-router.post('/verifications/:id', async (req, res) => {
-  const { status } = req.body;
-  try {
-    const updated = await Verification.findByIdAndUpdate(
-      req.params.id,
-      { status },
-      { new: true }
-    );
-    res.json({ message: `Marked as ${status}`, updated });
-  } catch (err) {
-    res.status(500).json({ message: 'Failed to update verification' });
-  }
-});
+// ✅ Use the controller for verifying user (PUT)
+router.put('/verifications/:id', verifyUser);
 
-// ✅ BALANCE UPDATE ROUTE
+// ✅ BALANCE UPDATE
 router.put('/balance/:userId', async (req, res) => {
   const { balance } = req.body;
   try {
@@ -46,6 +33,8 @@ router.put('/balance/:userId', async (req, res) => {
     res.status(500).json({ message: 'Failed to update balance' });
   }
 });
+
+// ✅ Withdrawals
 router.get('/withdrawals', async (req, res) => {
   try {
     const withdrawals = await Withdrawal.find().populate('user');
@@ -69,5 +58,4 @@ router.put('/withdrawals/:id', async (req, res) => {
   }
 });
 
-router.put('/verifications/:id', verifyUser);
 module.exports = router;

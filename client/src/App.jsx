@@ -11,6 +11,8 @@ import AdminRoute from './components/AdminRoute.jsx';
 import { useAuth } from './context/AuthContext'; // ✅ Import AuthContext to access user state
 import SettingsPage from './components/SettingsPage.jsx';
 import VerifyPage from './pages/VerifyPage.jsx'; // ✅ Import VerifyPage
+import VerifyRedirect from './pages/VerifyRedirect.jsx';
+import VerificationPending from './pages/VerificationPending.jsx';
 
 const App = () => {
   const { user } = useAuth(); // Access user from AuthContext
@@ -20,6 +22,9 @@ const App = () => {
         <Route path="/" element={<LandingPage />} />
         <Route path='/settings' element={<SettingsPage/>} />
         <Route path='/verification' element={<VerifyPage />} />
+        <Route path='/redirect' element={<VerifyRedirect />} />
+        <Route path='/pending' element={<VerificationPending />} />
+
        <Route
   path="/signin"
   element={!user ? <SignInForm /> : <Navigate to={user.role === 'admin' ? '/admin' : '/dashboard'} />}
