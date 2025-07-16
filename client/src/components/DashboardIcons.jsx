@@ -16,7 +16,7 @@ import {
 import { Link } from 'react-router';
 
 const dashboardItems = [
-  { label: "Send", icon: <Send size={20} />, path: "/transfer" },
+  { label: "WithDrawal", icon: <Send size={20} />, path: "/transfer" },
   { label: "Load", icon: <Download size={20} /> },
   { label: "Transfer", icon: <Banknote size={20} /> },
   { label: "Bills", icon: <Receipt size={20} /> },

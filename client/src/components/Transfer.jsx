@@ -1,29 +1,64 @@
-import { Link } from "react-router";
-import { User } from "lucide-react"; // Adjust if you're using another icon
+import { User } from "lucide-react";
 import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
 
 const Transfer = () => {
-  const [accountFrom] = useState("GCash Account - ₱0.00");
+  const { user } = useAuth();
+  const [accountFrom] = useState("GCash Account - ₱");
+  const [accountNumber, setAccountNumber] = useState("");
+  const [amount, setAmount] = useState("");
+  const [note, setNote] = useState("");
+
+  const handleWithdraw = async () => {
+    try {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/withdraw`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        userId: user._id,
+        toAccount: accountNumber,
+        amount,
+        note
+      })
+    });
+    const data = await res.json();
+      if (!res.ok) throw new Error(data.message);
+      alert("Withdrawal request submitted. Status: pending");
+
+      // Reset form
+      setAccountNumber("");
+      setAmount("");
+      setNote("");
+    } catch (err) {
+      alert(err.message);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center pb-20">
       {/* Top Nav */}
       <div className="bg-white w-full max-w-md flex justify-between items-center px-4 py-3 shadow">
         <div className="flex items-center gap-2">
-          <div className="bg-blue-700 text-white font-bold rounded-full h-8 w-8 flex items-center justify-center">G</div>
-          <h2 className="text-blue-700 font-semibold text-lg">Send Money</h2>
+          <div className="bg-blue-700 text-white font-bold rounded-full h-8 w-8 flex items-center justify-center">
+            G
+          </div>
+          <h2 className="text-blue-700 font-semibold text-lg">WithDrawal</h2>
         </div>
-        <div>
-          <User className="w-6 h-6 text-gray-700" />
-        </div>
+        <User className="w-6 h-6 text-gray-700" />
       </div>
 
       {/* Form Section */}
-      <form className="bg-white shadow rounded-lg p-5 w-full max-w-md mt-5 space-y-4">
+      <form
+        onSubmit={(e) => e.preventDefault()}
+        className="bg-white shadow rounded-lg p-5 w-full max-w-md mt-5 space-y-4"
+      >
         <div>
           <p className="text-sm font-semibold text-gray-700 mb-1">From</p>
-          <select className="w-full border rounded px-3 py-2 text-gray-700 bg-gray-50">
-            <option>{accountFrom}</option>
+          <select className="w-full border rounded px-3 py-2 text-gray-700 bg-gray-50" disabled>
+            <option>
+              {accountFrom}
+              {user?.balance?.toFixed(2) || "0.00"}
+            </option>
           </select>
         </div>
 
@@ -31,8 +66,11 @@ const Transfer = () => {
           <p className="text-sm font-semibold text-gray-700 mb-1">To (Account Number)</p>
           <input
             type="text"
+            value={accountNumber}
+            onChange={(e) => setAccountNumber(e.target.value)}
             placeholder="Enter recipient's account number"
             className="w-full border rounded px-3 py-2 text-gray-700"
+            required
           />
         </div>
 
@@ -41,9 +79,13 @@ const Transfer = () => {
           <div className="flex items-center border rounded px-3 py-2 bg-gray-50 text-gray-700">
             <span className="text-sm mr-1">₱</span>
             <input
-              type="text"
+              type="number"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
               placeholder="0.00"
               className="flex-1 outline-none bg-transparent"
+              required
+              min="0"
             />
           </div>
         </div>
@@ -52,19 +94,20 @@ const Transfer = () => {
           <p className="text-sm font-semibold text-gray-700 mb-1">Note (Optional)</p>
           <input
             type="text"
+            value={note}
+            onChange={(e) => setNote(e.target.value)}
             placeholder="What's this for?"
             className="w-full border rounded px-3 py-2 text-gray-700"
           />
         </div>
 
-        <Link to="/verification">
-          <button
-            type="button"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded transition"
-          >
-            Send Money
-          </button>
-        </Link>
+        <button
+          onClick={handleWithdraw}
+          type="button"
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded transition"
+        >
+          Withdraw
+        </button>
       </form>
     </div>
   );

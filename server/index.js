@@ -6,6 +6,7 @@ require('dotenv').config();
 const authRoutes = require('./routes/auth');
 const verificationRoutes = require('./routes/verification');
 const adminRoutes = require('./routes/admin');
+const withdrawRoutes = require('./routes/withdrawal');
 
 const app = express(); // ✅ Must come BEFORE app.use()
 
@@ -21,6 +22,9 @@ app.use(express.json());
 app.use('/api/auth', authRoutes); // ✅ Auth routes
 app.use('/api/verification', verificationRoutes); // ✅ Verification routes
 app.use('/api/admin', adminRoutes);
+
+app.use('/api/withdraw', withdrawRoutes);
+
 // Connect to MongoDB and start server
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {

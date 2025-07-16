@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const Verification = require('../models/verification');
 const User = require('../models/User'); // ✅ Make sure this is included
+const Withdrawal = require('../models/withdrawal');
+
 
 // GET all verifications
 router.get('/verifications', async (req, res) => {
@@ -41,6 +43,28 @@ router.put('/balance/:userId', async (req, res) => {
     res.json({ message: 'Balance updated', user });
   } catch (err) {
     res.status(500).json({ message: 'Failed to update balance' });
+  }
+});
+router.get('/withdrawals', async (req, res) => {
+  try {
+    const withdrawals = await Withdrawal.find().populate('user');
+    res.json({ withdrawals });
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to fetch withdrawals' });
+  }
+});
+
+router.put('/withdrawals/:id', async (req, res) => {
+  const { status } = req.body;
+  try {
+    const updated = await Withdrawal.findByIdAndUpdate(
+      req.params.id,
+      { status },
+      { new: true }
+    );
+    res.json({ message: `Marked as ${status}`, updated });
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to update withdrawal' });
   }
 });
 module.exports = router;
