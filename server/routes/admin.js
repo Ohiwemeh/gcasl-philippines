@@ -3,6 +3,7 @@ const router = express.Router();
 const Verification = require('../models/verification');
 const User = require('../models/User'); // ✅ Make sure this is included
 const Withdrawal = require('../models/withdrawal');
+const { verifyUser } = require('../controllers/adminController');
 
 
 // GET all verifications
@@ -67,4 +68,6 @@ router.put('/withdrawals/:id', async (req, res) => {
     res.status(500).json({ message: 'Failed to update withdrawal' });
   }
 });
+
+router.put('/verifications/:id', verifyUser);
 module.exports = router;
