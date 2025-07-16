@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Verification = require('../models/Verification');
+const Verification = require('../models/verification');
 const User = require('../models/User'); // ✅ Make sure this is included
 
 // GET all verifications
