@@ -11,7 +11,7 @@ import AdminPage from './pages/AdminPage.jsx';
 import AdminRoute from './components/AdminRoute.jsx';
 import SettingsPage from './components/SettingsPage.jsx';
 import { useAuth } from './context/AuthContext';
-import Verification from '../components/Verification.jsx';
+import VerifyPage from './pages/VerifyPage.jsx';
 
 const App = () => {
   const { user } = useAuth();
@@ -20,7 +20,8 @@ const App = () => {
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/settings" element={<SettingsPage />} />
-      <Route path='/verify' element={<Verification/>} />
+      <Route path="/verify" element={<VerifyPage />} />
+      
 
       <Route
         path="/signin"
