@@ -15,5 +15,6 @@ const UserHeader = () => {
     </div>
   </div>
 );
+};
 
-export default UserHeader
+export default UserHeader;
