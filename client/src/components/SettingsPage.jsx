@@ -10,7 +10,7 @@ export default function SettingsPage() {
       title: "Verification",
       desc: "Verify your account to unlock more features.",
       icon: <BadgeCheck className="text-blue-600" size={24} />,
-      onClick: () => navigate("/verification"),
+      onClick: () => navigate("/verify"),
     },
     {
       title: "Change Password",
