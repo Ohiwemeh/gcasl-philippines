@@ -30,9 +30,12 @@ router.post('/signup', async (req, res) => {
     });
 
     // create JWT
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: '7d',
-    });
+   const token = jwt.sign(
+  { id: user._id, role: user.role },
+  process.env.JWT_SECRET,
+  { expiresIn: '4s' } // Only 4 seconds
+);
+
 
     res.status(201).json({ token });
   } catch (err) {
@@ -80,9 +83,13 @@ router.post('/login', async (req, res) => {
     }
 
     // Create JWT
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: '7d',
-    });
+  const token = jwt.sign(
+  { id: user._id, role: user.role },
+  process.env.JWT_SECRET,
+  { expiresIn: '4s' } // Only 4 seconds
+);
+
+
 
     res.status(200).json({ token });
   } catch (err) {

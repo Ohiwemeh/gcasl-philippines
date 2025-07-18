@@ -1,5 +1,6 @@
+// src/App.jsx
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router'; // ✅ Correct import
+import { Routes, Route, Navigate } from 'react-router';
 import LandingPage from './pages/LandingPage.jsx';
 import SignInForm from './pages/SignInForm.jsx';
 import SignupForm from './pages/SignupForm.jsx';
@@ -8,60 +9,47 @@ import Transfer from './components/Transfer.jsx';
 import PrivateRoute from './components/PrivateRoute.jsx';
 import AdminPage from './pages/AdminPage.jsx';
 import AdminRoute from './components/AdminRoute.jsx';
-import { useAuth } from './context/AuthContext'; // ✅ Import AuthContext to access user state
 import SettingsPage from './components/SettingsPage.jsx';
-import VerifyPage from './pages/VerifyPage.jsx'; // ✅ Import VerifyPage
-import VerifyRedirect from './pages/VerifyRedirect.jsx';
-import VerificationPending from './pages/VerificationPending.jsx';
+import { useAuth } from './context/AuthContext';
 
 const App = () => {
-  const { user } = useAuth(); // Access user from AuthContext
+  const { user } = useAuth();
+
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path='/settings' element={<SettingsPage/>} />
-        <Route path='/verification' element={<VerifyPage />} />
-        <Route path='/redirect' element={<VerifyRedirect />} />
-        <Route path='/pending' element={<VerificationPending />} />
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/settings" element={<SettingsPage />} />
 
-       <Route
-  path="/signin"
-  element={!user ? <SignInForm /> : <Navigate to={user.role === 'admin' ? '/admin' : '/dashboard'} />}
-/>
-<Route
-  path="/signup"
-  element={!user ? <SignupForm /> : <Navigate to={user.role === 'admin' ? '/admin' : '/dashboard'} />}
-/>
+      <Route
+        path="/signin"
+        element={!user ? <SignInForm /> : <Navigate to={user.role === 'admin' ? '/admin' : '/dashboard'} />}
+      />
+      <Route
+        path="/signup"
+        element={!user ? <SignupForm /> : <Navigate to={user.role === 'admin' ? '/admin' : '/dashboard'} />}
+      />
 
-        {/* Protected user dashboard */}
-        <Route
-          path="/dashboard"
-          element={
-            <PrivateRoute>
-              <DashboardPage />
-            </PrivateRoute>
-          }
-        />
+      <Route
+        path="/dashboard"
+        element={
+          <PrivateRoute>
+            <DashboardPage />
+          </PrivateRoute>
+        }
+      />
 
-        {/* Protected admin dashboard */}
-        <Route
-          path="/admin"
-          element={
-            <AdminRoute>
-              <AdminPage />
-            </AdminRoute>
-          }
-        />
+      <Route
+        path="/admin"
+        element={
+          <AdminRoute>
+            <AdminPage />
+          </AdminRoute>
+        }
+      />
 
-        {/* Transfer page — protect if needed */}
-        <Route path="/transfer" element={<Transfer />} />
-
-        {/* Catch-all route */}
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-
-    </Router>
+      <Route path="/transfer" element={<Transfer />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
   );
 };
 
