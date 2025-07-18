@@ -20,7 +20,7 @@ const App = () => {
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/settings" element={<SettingsPage />} />
-      <Route path='/verify' element={<Verification/>}
+      <Route path='/verify' element={<Verification/>}/>
 
       <Route
         path="/signin"
