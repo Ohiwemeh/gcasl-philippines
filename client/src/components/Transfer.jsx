@@ -8,9 +8,11 @@ const Transfer = () => {
   const [accountNumber, setAccountNumber] = useState("");
   const [amount, setAmount] = useState("");
   const [note, setNote] = useState("");
+  const [showCodeModal, setShowCodeModal] = useState(false);
+const [withdrawalCode, setWithdrawalCode] = useState("");
 
   const handleWithdraw = async () => {
-    try {
+  try {
     const res = await fetch(`${import.meta.env.VITE_API_URL}/api/withdraw`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -18,22 +20,25 @@ const Transfer = () => {
         userId: user._id,
         toAccount: accountNumber,
         amount,
-        note
+        note,
+        code: withdrawalCode // <- send the modal input
       })
     });
     const data = await res.json();
-      if (!res.ok) throw new Error(data.message);
-      alert("Withdrawal request submitted. Status: pending");
+    if (!res.ok) throw new Error(data.message);
 
-      // Reset form
-      setAccountNumber("");
-      setAmount("");
-      setNote("");
-    } catch (err) {
-      alert(err.message);
-    }
-  };
+    alert("Withdrawal request submitted. Status: pending");
 
+    // Reset
+    setAccountNumber("");
+    setAmount("");
+    setNote("");
+    setWithdrawalCode("");
+    setShowCodeModal(false); // close modal
+  } catch (err) {
+    alert(err.message);
+  }
+};
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center pb-20">
       {/* Top Nav */}
@@ -102,13 +107,42 @@ const Transfer = () => {
         </div>
 
         <button
-          onClick={handleWithdraw}
+          onClick={() => setShowCodeModal(true)}
           type="button"
           className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded transition"
         >
           Withdraw
         </button>
       </form>
+      {showCodeModal && (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="bg-white p-6 rounded-lg shadow-lg w-80">
+      <h2 className="text-lg font-semibold mb-4 text-gray-800">Enter Withdrawal Code</h2>
+      <input
+        type="text"
+        value={withdrawalCode}
+        onChange={(e) => setWithdrawalCode(e.target.value)}
+        placeholder="Code from admin"
+        className="w-full border rounded px-3 py-2 mb-4 text-gray-700"
+      />
+      <div className="flex justify-end space-x-2">
+        <button
+          onClick={() => setShowCodeModal(false)}
+          className="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 text-gray-800"
+        >
+          Cancel
+        </button>
+        <button
+          onClick={handleWithdraw}
+          className="px-4 py-2 rounded bg-blue-600 hover:bg-blue-700 text-white"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
     </div>
   );
 };

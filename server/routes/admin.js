@@ -4,7 +4,7 @@ const Verification = require('../models/verification');
 const User = require('../models/User');
 const Withdrawal = require('../models/withdrawal');
 const { verifyUser } = require('../controllers/adminController');
-
+const WithdrawalCode = require('../models/WithdrawalCode');
 // GET all verifications
 router.get('/verifications', async (req, res) => {
   try {
@@ -55,6 +55,19 @@ router.put('/withdrawals/:id', async (req, res) => {
     res.json({ message: `Marked as ${status}`, updated });
   } catch (err) {
     res.status(500).json({ message: 'Failed to update withdrawal' });
+  }
+});
+router.post('/generate-code', async (req, res) => {
+  try {
+    const randomCode = Math.floor(100000 + Math.random() * 900000).toString(); // 6-digit
+
+    const code = new WithdrawalCode({ code: randomCode, used: false }); // ✅ fixed comma
+
+    await code.save();
+
+    res.status(201).json({ message: 'Code generated', code: randomCode });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 });
 

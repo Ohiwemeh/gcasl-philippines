@@ -20,6 +20,7 @@ const AdminPage = () => {
   const [balanceUpdates, setBalanceUpdates] = useState({});
   const [withdrawals, setWithdrawals] = useState([]);
   const [emailTarget, setEmailTarget] = useState(null);
+  const [generatedCode, setGeneratedCode] = useState(null);
 
   // Fetch withdrawals
   useEffect(() => {
@@ -56,6 +57,19 @@ const AdminPage = () => {
   const handleBalanceChange = (userId, value) => {
     setBalanceUpdates({ ...balanceUpdates, [userId]: value });
   };
+
+  const generateWithdrawalCode = async () => {
+  try {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/generate-code`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    const data = await res.json();
+    setGeneratedCode(data.code);
+  } catch (err) {
+    alert('Failed to generate withdrawal code');
+  }
+};
 
   const updateBalance = async (userId) => {
     const balance = parseFloat(balanceUpdates[userId] || 0);
@@ -239,6 +253,20 @@ const AdminPage = () => {
             </div>
           )}
         </div>
+        <div className="mt-10 p-4 bg-white border shadow rounded">
+  <h2 className="text-lg font-bold text-blue-700 mb-2">Generate Withdrawal Code</h2>
+  <button
+    onClick={generateWithdrawalCode}
+    className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
+  >
+    Generate Code
+  </button>
+  {generatedCode && (
+    <p className="mt-2 text-green-600 font-mono">
+      Generated Code: <strong>{generatedCode}</strong>
+    </p>
+  )}
+</div>
 
         <LogoutButton />
       </div>
