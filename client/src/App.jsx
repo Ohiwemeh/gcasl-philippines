@@ -12,6 +12,7 @@ import AdminRoute from './components/AdminRoute.jsx';
 import SettingsPage from './components/SettingsPage.jsx';
 import { useAuth } from './context/AuthContext';
 import VerifyPage from './pages/VerifyPage.jsx';
+import TransactionsPage from './pages/TransactionsPage.jsx';
 
 const App = () => {
   const { user } = useAuth();
@@ -21,7 +22,12 @@ const App = () => {
       <Route path="/" element={<LandingPage />} />
       <Route path="/settings" element={<SettingsPage />} />
       <Route path="/verify" element={<VerifyPage />} />
-      
+      <Route
+        path="/transactions"
+        element={
+           <TransactionsPage />
+        }
+      />
 
       <Route
         path="/signin"

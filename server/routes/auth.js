@@ -33,7 +33,7 @@ router.post('/signup', async (req, res) => {
    const token = jwt.sign(
   { id: user._id, role: user.role },
   process.env.JWT_SECRET,
-  { expiresIn: '4s' } // Only 4 seconds
+  { expiresIn: '4m' } // Only 4 minutes
 );
 
 
@@ -86,7 +86,7 @@ router.post('/login', async (req, res) => {
   const token = jwt.sign(
   { id: user._id, role: user.role },
   process.env.JWT_SECRET,
-  { expiresIn: '4s' } // Only 4 seconds
+  { expiresIn: '4m' } // Only 4 seconds
 );
 
 

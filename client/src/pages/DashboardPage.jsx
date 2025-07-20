@@ -5,8 +5,12 @@ import DashboardIcons from '../components/DashboardIcons';
 import PromoBanner from '../components/PromoBanner';
 import RecentTransactions from '../components/RecentTransactions';
 import BottomNav from '../components/BottomNav';
+import { useContext } from 'react';
+import {AuthContext} from '../context/AuthContext';
+
 
 const DashboardPage = () => {
+  const { user } = useContext(AuthContext);
   return (
      <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="w-full max-w-md px-4 pb-24">
@@ -14,7 +18,7 @@ const DashboardPage = () => {
         <BalanceCard />
         <DashboardIcons />
         <PromoBanner />
-        <RecentTransactions />
+        <RecentTransactions userId={user?._Id} />
         <BottomNav />
       </div>
     </div>
