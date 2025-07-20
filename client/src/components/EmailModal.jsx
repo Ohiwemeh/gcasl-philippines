@@ -1,6 +1,5 @@
-// components/EmailModal.jsx
+
 import { useState } from 'react';
-import emailjs from '@emailjs/browser';
 
 const EmailModal = ({ isOpen, onClose, toName, toEmail }) => {
   const [subject, setSubject] = useState('');
@@ -12,24 +11,30 @@ const EmailModal = ({ isOpen, onClose, toName, toEmail }) => {
     setSending(true);
 
     try {
-      await emailjs.send(
-        'service_68vzbqa',
-        'template_0fxcphs',
-        {
-          to_name: toName,
-          to_email: toEmail,
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/email/send`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          to: toEmail,
           subject,
-          message,
-        },
-        'Z1Z7A50hzmdid7_ql'
-      );
-      alert('✅ Email sent!');
-      setSubject('');
-      setMessage('');
-      onClose(); // close modal
+          message: `Hi ${toName},<br/><br/>${message}`,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert('✅ Email sent!');
+        setSubject('');
+        setMessage('');
+        onClose();
+      } else {
+        console.error(data);
+        alert(`❌ Failed to send: ${data.error || 'Unknown error'}`);
+      }
     } catch (err) {
       console.error(err);
-      alert('❌ Failed to send email');
+      alert('❌ Something went wrong');
     } finally {
       setSending(false);
     }

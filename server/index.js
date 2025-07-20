@@ -7,7 +7,7 @@ const authRoutes = require('./routes/auth');
 const verificationRoutes = require('./routes/verification');
 const adminRoutes = require('./routes/admin');
 const withdrawRoutes = require('./routes/withdrawal');
-
+const emailRoutes = require('./routes/email');
 const app = express(); // ✅ Must come BEFORE app.use()
 
 // Middlewares
@@ -22,7 +22,7 @@ app.use(express.json());
 app.use('/api/auth', authRoutes); // ✅ Auth routes
 app.use('/api/verification', verificationRoutes); // ✅ Verification routes
 app.use('/api/admin', adminRoutes);
-
+app.use('/api/email', emailRoutes);
 app.use('/api/withdraw', withdrawRoutes);
 
 // Connect to MongoDB and start server
