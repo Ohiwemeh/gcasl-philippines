@@ -12,7 +12,7 @@ const app = express(); // ✅ Must come BEFORE app.use()
 
 // Middlewares
 app.use(cors({
-  origin: ['http://localhost:5173', 'https://gcasl-philippines.vercel.app'],
+  origin: ['http://localhost:5173', 'https://gcasl-philippines.vercel.app','www.gcash-philippians.com'],
   credentials: true,
 }));
 
