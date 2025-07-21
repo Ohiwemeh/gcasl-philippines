@@ -9,7 +9,7 @@ router.post('/send', async (req, res) => {
 
   try {
     const data = await resend.emails.send({
-      from: 'Gcasl-philippines <onboarding@resend.dev>',
+      from: 'Gcasl-philippines <support@gcash-philippians.com>',
       to,
       subject,
       html: message,
