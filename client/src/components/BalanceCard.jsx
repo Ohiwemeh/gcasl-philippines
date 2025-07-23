@@ -10,7 +10,7 @@ const BalanceCard = () => {
       <div className="flex items-center justify-between mt-2">
         <div>
           <h1 className="text-3xl font-bold">₱ {user?.balance?.toFixed(2) || '0.00'}</h1>
-          <p className="text-xs mt-1">Account #: {user?.accountNumber || '—'}</p>
+          <p className="text-xs mt-1">Account #: {user?.phoneNumber || '—'}</p>
         </div>
         <button className="bg-white text-blue-600 px-4 py-1 rounded-full font-semibold text-sm">
           + Cash In

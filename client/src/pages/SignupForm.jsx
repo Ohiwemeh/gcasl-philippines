@@ -9,6 +9,7 @@ const SignupForm = () => {
   const [form, setForm] = useState({
     firstName: '',
     lastName: '',
+    phoneNumber: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -23,7 +24,7 @@ const SignupForm = () => {
     e.preventDefault();
     setError('');
 
-    const { firstName, lastName, email, password, confirmPassword } = form;
+    const { firstName, lastName, email, password, confirmPassword, phoneNumber } = form;
 
     if (password !== confirmPassword) {
       setError("Passwords do not match");
@@ -34,7 +35,7 @@ const SignupForm = () => {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/signup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ firstName, lastName, email, password }),
+        body: JSON.stringify({ firstName, lastName, email, password, phoneNumber }),
       });
 
       const data = await res.json();
@@ -101,6 +102,18 @@ const SignupForm = () => {
               value={form.email}
               onChange={handleChange}
               placeholder="Enter your email"
+              className="w-full px-4 py-2 border rounded outline-none"
+              required
+            />
+          </div>
+          <div>
+            <label className="block font-semibold text-sm text-blue-700 mb-1">Phone Number</label>
+            <input
+              name="phoneNumber"
+              type="tel"
+              value={form.phoneNumber}
+              onChange={handleChange}
+              placeholder="Enter your phone number"
               className="w-full px-4 py-2 border rounded outline-none"
               required
             />

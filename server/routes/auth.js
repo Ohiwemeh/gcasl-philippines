@@ -6,7 +6,7 @@ const User = require('../models/User'); // adjust path if needed
 
 // POST /api/auth/signup
 router.post('/signup', async (req, res) => {
-  const { firstName, lastName, email, password } = req.body;
+  const { firstName, lastName, email, phoneNumber, password } = req.body;
 
   try {
     // check if user already exists
@@ -23,6 +23,7 @@ router.post('/signup', async (req, res) => {
       firstName,
       lastName,
       email,
+      phoneNumber,
       password: hashedPassword,
       role: 'user',          // default role
       isVerified: false,     // user must verify after signup
