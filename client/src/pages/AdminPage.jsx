@@ -149,19 +149,20 @@ const AdminPage = () => {
                 </div>
 
                 <div className="flex items-center gap-2 mb-2">
-                  <input
-                    type="number"
-                    className="border px-2 py-1 rounded w-32"
-                    placeholder="New Balance"
-                    value={balanceUpdates[v.user._id] || ''}
-                    onChange={(e) => handleBalanceChange(v.user._id, e.target.value)}
-                  />
-                  <button
-                    onClick={() => updateBalance(v.user._id)}
-                    className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700"
-                  >
-                    Update Balance
-                  </button>
+                 <input
+  type="number"
+  className="border px-2 py-1 rounded w-32"
+  placeholder="New Balance"
+  value={v.user ? balanceUpdates[v.user._id] || '' : ''}
+  onChange={(e) => v.user && handleBalanceChange(v.user._id, e.target.value)}
+/>
+<button
+  onClick={() => v.user && updateBalance(v.user._id)}
+  disabled={!v.user}
+  className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 disabled:opacity-50"
+>
+  Update Balance
+</button>
                 </div>
 
                 {v.status === 'pending' && (
@@ -174,26 +175,26 @@ const AdminPage = () => {
                 )}
 
                 {v.status === 'approved' && (
-                  <>
-                    <button
-                      onClick={() =>
-                        setEmailTarget({
-                          name: `${v.user?.firstName} ${v.user?.lastName}`,
-                          email: v.user?.email,
-                        })
-                      }
-                      className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 mt-2"
-                    >
-                      Send Email
-                    </button>
-                    <EmailModal
-                      isOpen={emailTarget?.email === v.user?.email}
-                      onClose={() => setEmailTarget(null)}
-                      toName={emailTarget?.name}
-                      toEmail={emailTarget?.email}
-                    />
-                  </>
-                )}
+  <button
+    onClick={() =>
+      setEmailTarget({
+        name: `${v.user?.firstName} ${v.user?.lastName}`,
+        email: v.user?.email,
+      })
+    }
+    className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 mt-2"
+  >
+    Send Email
+  </button>
+)}
+
+<EmailModal
+  isOpen={!!emailTarget}
+  onClose={() => setEmailTarget(null)}
+  toName={emailTarget?.name}
+  toEmail={emailTarget?.email}
+/>
+
               </div>
             ))}
           </div>
