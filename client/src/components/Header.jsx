@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <header className="bg-blue-600 text-white">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        <div className="font-bold text-xl">GCASH</div>
+        <div className="font-bold text-xl">BdoTrustFundsPayoutGateway</div>
         <nav className="hidden md:flex gap-6 font-semibold">
           <a href="#" className="hover:underline">Personal</a>
           <a href="#" className="hover:underline">Business</a>

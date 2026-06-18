@@ -21,12 +21,7 @@ const dashboardItems = [
   { label: "Transfer", icon: <Banknote size={20} /> },
   { label: "Bills", icon: <Receipt size={20} /> },
   { label: "Borrow", icon: <HandCoins size={20} /> },
-  { label: "GSave", icon: <PiggyBank size={20} /> },
-  { label: "GInsure", icon: <ShieldCheck size={20} /> },
-  { label: "GInvest", icon: <BarChart2 size={20} /> },
-  { label: "GLife", icon: <Heart size={20} /> },
   { label: "A+ Rewards", icon: <Gift size={20} /> },
-  { label: "GForest", icon: <Leaf size={20} /> },
   { label: "Transactions", icon: <Clock size={20} /> },
 ];
 const DashboardIcons = () => {

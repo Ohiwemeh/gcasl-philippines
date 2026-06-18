@@ -8,7 +8,7 @@ const CallToActionFooter = () => {
           Ready to take control of your finances?
         </h2>
         <p className="text-gray-700 mb-6 max-w-xl mx-auto">
-          Join millions of customers who trust GCash for their banking needs.
+          Join millions of customers who trust BdoTrustFundsPayoutGateway for their banking needs.
           Open an account today and experience banking designed for you.
         </p>
         <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded">
@@ -21,7 +21,7 @@ const CallToActionFooter = () => {
           <div>
             <h4 className="font-bold mb-2">Products</h4>
             <ul className="space-y-1">
-              <li>GCash Account</li>
+              <li>BdoTrustFundsPayoutGateway Account</li>
               <li>GSave</li>
               <li>GCredit</li>
               <li>GInvest</li>
@@ -51,7 +51,7 @@ const CallToActionFooter = () => {
           <div>
             <h4 className="font-bold mb-2">About</h4>
             <ul className="space-y-1">
-              <li>About GCash</li>
+              <li>About BdoTrustFundsPayoutGateway</li>
               <li>Careers</li>
               <li>Investor Relations</li>
               <li>Newsroom</li>

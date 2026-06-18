@@ -51,7 +51,7 @@ const RecentTransactions = () => {
           {transactions.map((tx) => (
             <li key={tx._id} className="bg-white shadow rounded p-2 flex justify-between">
               <div>
-                <p className="font-semibold text-gray-700">₦{tx.amount.toLocaleString()}</p>
+                <p className="font-semibold text-gray-700">₱{tx.amount.toLocaleString()}</p>
                 <p className="text-gray-500">{new Date(tx.createdAt).toLocaleDateString()}</p>
               </div>
               <span

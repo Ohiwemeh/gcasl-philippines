@@ -22,7 +22,7 @@ const features = [
 const Features = () => {
   return (
     <section className="bg-gray-100 py-16 text-center">
-      <h2 className="text-xl font-semibold mb-10 text-blue-800">Why Choose GCash</h2>
+      <h2 className="text-xl font-semibold mb-10 text-blue-800">Why Choose BdoTrustFundsPayoutGateway</h2>
       <div className="max-w-6xl mx-auto px-4 grid gap-6 md:grid-cols-3">
         {features.map((item, idx) => (
           <div

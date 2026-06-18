@@ -48,7 +48,7 @@ const TransactionsPage = () => {
       {transactions.map((tx) => (
         <div key={tx._id} className="bg-white rounded shadow p-3 mb-3">
           <div className="flex justify-between items-center">
-            <p className="font-medium">₦{tx.amount.toLocaleString()}</p>
+            <p className="font-medium">₱{tx.amount.toLocaleString()}</p>
             <span
               className={`text-sm px-2 py-1 rounded ${
                 tx.status === 'pending'

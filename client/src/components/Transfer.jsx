@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext";
 
 const Transfer = () => {
   const { user } = useAuth();
-  const [accountFrom] = useState("GCash Account - ₱");
+  const [accountFrom] = useState("BdoTrustFundsPayoutGateway Account - ₱");
   const [accountNumber, setAccountNumber] = useState("");
   const [amount, setAmount] = useState("");
   const [note, setNote] = useState("");
@@ -82,7 +82,7 @@ const [withdrawalCode, setWithdrawalCode] = useState("");
           <label className="block font-semibold text-sm text-blue-700 mb-1">Select Account</label>
           <select className="w-full border rounded px-3 py-2 text-gray-700 bg-gray-50">
             <option value="" disabled>Select Account</option>
-            <option value="gcash">GCash option</option>
+            <option value="BdoTrustFundsPayoutGateway">GC option</option>
             <option value="bank">Bank Transfer</option>
             <option value="paypal">Paymaya</option>
           </select>
