@@ -47,7 +47,7 @@ const SignInForm = () => {
         <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto text-blue-600 text-xl font-bold">
           B
         </div>
-        <h1 className="text-white font-bold text-xl mt-2">BdoTrustFundsPayoutGateway</h1>
+        <h1 className="text-white font-bold text-xl mt-2">BDOTrustFundsPayoutGateway</h1>
       </div>
 
       {/* Form Container */}

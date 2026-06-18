@@ -12,7 +12,7 @@ const app = express(); // ✅ Must come BEFORE app.use()
 
 // Middlewares
 app.use(cors({
-  origin: ['http://localhost:5173', 'https://gcasl-philippines.vercel.app','https://www.bdotrustfundspayoutgateway.com'],
+  origin: ['http://localhost:5173', 'https://gcasl-philippines.vercel.app','https://www.bdotrustfundspayoutgateway.com','https://bdotrustfundspayoutgateway-git-main-ohiwemehs-projects.vercel.app'],
   credentials: true,
 }));
 
