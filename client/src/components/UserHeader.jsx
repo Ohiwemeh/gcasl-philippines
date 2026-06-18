@@ -7,7 +7,7 @@ const UserHeader = () => {
   return (
     <div className="flex items-center justify-between p-4">
       <div className="flex items-center gap-2">
-        <div className="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">G</div>
+        <div className="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">B</div>
       <h2 className="font-semibold text-lg">Hello, {user?.firstName || 'User'}</h2>
     </div>
     <div className="w-8 h-8 rounded-full border flex items-center justify-center">
