@@ -9,7 +9,7 @@ router.post('/send', async (req, res) => {
 
   try {
     const data = await resend.emails.send({
-      from: 'Gcasl-philippines <support@BdoTrustFundsPayoutGateway.com>',
+      from: 'Gcasl-philippines <support@bdotrust.com>',
       to,
       subject,
       html: message,
