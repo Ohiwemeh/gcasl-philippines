@@ -10,7 +10,7 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary,
   params: {
-    folder: 'gcasl_verifications',
+    folder: 'BDO-Trust_verifications',
     allowed_formats: ['jpg', 'jpeg', 'png', 'pdf'],
   },
 });
